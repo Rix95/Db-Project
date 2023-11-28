@@ -4,12 +4,20 @@ import cors from "cors";
 
 const app = express();
 
-
 const db = mysql2.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "Tamusa2024",
-  database: "test",
+  host: "150.220.55.62",
+  user: "tamusa",
+  password: "Tamusa123$",
+  database: "sys",
+});
+
+// Connect to MySQL
+db.connect((err) => {
+  if (err) {
+    console.error("Error connecting to MySQL:", err);
+    return;
+  }
+  console.log("Connected to MySQL");
 });
 
 app.get("/", (req, res) => {
@@ -58,7 +66,6 @@ app.post("/books", (req, res) => {
   });
 });
 
-
 app.delete("/books/:book_id", (req, res) => {
   const bookId = req.params.book_id;
   const q = " DELETE FROM books WHERE book_id = ? ";
@@ -71,7 +78,8 @@ app.delete("/books/:book_id", (req, res) => {
 
 app.put("/books/:book_id", (req, res) => {
   const bookId = req.params.book_id;
-  const q = "UPDATE books SET `book_name`= ?, `price`= ?, `number_in_stock`= ?, `department_category`= ?, `publisher_name`= ?, `author_name`= ?, `description`= ?, `cover`= ? WHERE book_id = ?";
+  const q =
+    "UPDATE books SET `book_name`= ?, `price`= ?, `number_in_stock`= ?, `department_category`= ?, `publisher_name`= ?, `author_name`= ?, `description`= ?, `cover`= ? WHERE book_id = ?";
 
   const values = [
     req.body.book_name,
@@ -84,7 +92,7 @@ app.put("/books/:book_id", (req, res) => {
     req.body.cover,
   ];
 
-  db.query(q, [...values,bookId], (err, data) => {
+  db.query(q, [...values, bookId], (err, data) => {
     if (err) return res.send(err);
     return res.json(data);
   });

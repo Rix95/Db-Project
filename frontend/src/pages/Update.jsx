@@ -1,9 +1,6 @@
-import axios from "axios";
 import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import React, { useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Update = () => {
   // const [book, setBook] = useState({
@@ -16,15 +13,14 @@ const Update = () => {
   //   publisher_name: "",
   //   author_name: "",
   // });
-  
+
   const [error, setError] = useState(false);
 
   const location = useLocation();
   const navigate = useNavigate();
   const book = location.state;
 
-
-  console.log(book)
+  console.log(book);
   const bookId = location.pathname.split("/")[2];
 
   const handleChange = (e) => {

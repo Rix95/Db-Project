@@ -3,21 +3,19 @@ import { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { Link } from "react-router-dom";
 
 const Books = () => {
   const [books, setBooks] = useState([]);
   const [Book, setBook] = useState({
-      book_name: "",
-      description: "",
-      price: null,
-      cover: "",
-      number_in_stock: null,
-      department_category: "",
-      publisher_name: "",
-      author_name: "",
-    });
-
+    book_name: "",
+    description: "",
+    price: null,
+    cover: "",
+    number_in_stock: null,
+    department_category: "",
+    publisher_name: "",
+    author_name: "",
+  });
 
   useEffect(() => {
     const fetchAllBooks = async () => {
@@ -36,7 +34,7 @@ const Books = () => {
   const handleDelete = async (book_id) => {
     try {
       await axios.delete(`http://localhost:8800/books/${book_id}`);
-      window.location.reload()
+      window.location.reload();
     } catch (err) {
       console.log(err);
     }
@@ -58,12 +56,15 @@ const Books = () => {
             <p>Author: {book.author_name}</p>
             <br />
             <br />
-            <button className="delete" onClick={() => handleDelete(book.book_id)}>
+            <button
+              className="delete"
+              onClick={() => handleDelete(book.book_id)}
+            >
               Delete
             </button>
             <button className="update">
               <Link
-                to={{ pathname: `/update/${book.book_id}`, state: {book}} }
+                to={{ pathname: `/update/${book.book_id}`, state: { book } }}
                 style={{ color: "inherit", textDecoration: "none" }}
               >
                 Update
@@ -72,12 +73,6 @@ const Books = () => {
           </div>
         ))}
       </div>
-
-      <button className="addHome">
-        <Link to="/add" style={{ color: "inherit", textDecoration: "none" }}>
-          Add new book
-        </Link>
-      </button>
 
       <button className="addHome">
         <Link to="/add" style={{ color: "inherit", textDecoration: "none" }}>
